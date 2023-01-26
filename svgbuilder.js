@@ -23,8 +23,8 @@
             linkStrokeLinecap = "round", // link stroke linecap
             linkStrength,
             colors = d3.schemeTableau10, // an array of color strings, for the node groups
-            width = 640, // outer width, in pixels
-            height = 400, // outer height, in pixels
+            width = 800, // outer width, in pixels
+            height = 900, // outer height, in pixels
             invalidation // when this promise resolves, stop the simulation
         } = {}) {
             // Compute values.
@@ -379,6 +379,13 @@
                 }
             });
             return found;
+        }
+
+        function resetSvg(){
+            selectedDataElements = dataelements;
+            var svg = buildSvg(selectedDataElements);
+            $("#container").html(svg);
+            listSelectedConnectors();
         }
 
         function rebuildSvg() {

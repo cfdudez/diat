@@ -12,16 +12,24 @@
 <link rel="stylesheet" href="styles.css">
 
 <body>
-    <div class="header">Datapoint Impact Analysis Tool v0.01</div>
-    <input type="text" id="searchval" name="lname"><br><br>
-    <button id="rebuild" onclick="rebuildSvg()">Search</button>
-    <div id="container"></div>
-
-    <div id="tables" class="itemlist"></div>
-    <div id="svc" class="itemlist"></div>
-    <div id="web" class="itemlist"></div>
-    <div id="batch" class="itemlist"></div>
-
+    <div class="header">Datapoint Impact Analysis Tool </div>
+    <div class="searchbar">
+        
+        <div class="searcharea"><input type="text" id="searchval" name="lname" placeholder="start seach here..."></div>
+        <div class="searchbuttonarea"><button id="rebuild" onclick="rebuildSvg()">Search</button></div>
+        <div class="searchbuttonarea"><button id="reset" onclick="resetSvg()">Reset</button></div>
+    </div>
+    <div class="container" id="container"></div>
+    <div class="infoholder">
+        <div class="infolabel">Tables</div>
+        <div id="tables" class="itemlist"></div>
+        <div class="infolabel">Microservices</div>
+        <div id="svc" class="itemlist"></div>
+        <div class="infolabel">Frontends</div>
+        <div id="web" class="itemlist"></div>
+        <div class="infolabel">Batch Processes</div>
+        <div id="batch" class="itemlist"></div>
+    </div>
 </body>
 
 </html>
