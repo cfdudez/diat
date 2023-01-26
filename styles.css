@@ -1,8 +1,35 @@
+
+@font-face {
+    font-family: punk;
+    src: url(punk-kid/punk-kid/punkkid.ttf);
+  }
+
 svg {
     border: 1px solid #ccc;
 }
 
+body{
+    background: #333399;
+    margin:0px;
+    padding: 0px;
+}
+
 .itemlist {
     width: 20%;
+    height:20%;
+    overflow: auto;
     float: left;
+    border-radius: 1%;
+    border-width: 1px;
+    border-style: solid;
+    margin: 5px;
+    color: whitesmoke;    
+}
+
+.header{
+    color:whitesmoke;
+    background: black;
+    font-family: punk;
+    width:100%;
+    padding: 5px;
 }
