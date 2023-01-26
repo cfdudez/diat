@@ -144,7 +144,7 @@ function buildSvg(selectedElements) {
         id: "mySvg",
         nodeId: d => d.id,
         nodeGroup: d => d.group,
-        nodeTitle: d => `${d.id}\n${d.group}}`,
+        nodeTitle: d => `${d.id}\n${d.ntype}`,
         linkStrokeWidth: l => Math.sqrt(l.value),
         width: 1930,
         heigh: 800,
@@ -169,19 +169,19 @@ function searchFromPanel(element) {
 function listSelectedConnectors() {
     selectedDataElements.nodes.forEach((element, index, array) => {
         if (element.group == 1) {
-            $("#tables").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
+            $("#tables").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "("+ element.depth +")" + "</button>");
         }
 
         if (element.group == 2) {
-            $("#svc").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
+            $("#svc").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id +  "("+ element.depth +")" +"</button>");
         }
 
         if (element.group == 3) {
-            $("#web").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
+            $("#web").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "("+ element.depth +")" + "</button>");
         }
 
         if (element.group == 4) {
-            $("#batch").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
+            $("#batch").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "("+ element.depth +")" + "</button>");
         }
 
     });
@@ -224,11 +224,11 @@ function rebuildSvg() {
     var nodeList = [];
     nodeList.push(sval);
     var count = 0;
-    newDataElements = traverseNode(dataelements, newDataElements, nodeList);
+    newDataElements = traverseNode(dataelements, newDataElements, nodeList, count+1);
     count++;
 
     for(var i = count; i < depthOfSearch; i++){
-        newDataElements = traverseNode(dataelements, newDataElements, newDataElements.nodes);
+        newDataElements = traverseNode(dataelements, newDataElements, newDataElements.nodes, i+1);
     }
     
 
@@ -253,12 +253,13 @@ function walkNodeList(nodeList, searchvar){
     return found;
 }
 
-function traverseNode(dataelements, newDataElements, nodeList){
+function traverseNode(dataelements, newDataElements, nodeList, depth){
     dataelements.links.forEach((element, index, array) => {
         if (walkNodeList(nodeList,element.source) || walkNodeList(nodeList,element.target)) {
             dataelements.nodes.forEach((subElement, index2, array2) => {
                 if (subElement.id === element.target || subElement.id === element.source) {
                     if (!(checkNodes(newDataElements, subElement.id))) {
+                        subElement.depth = depth;
                         newDataElements.nodes.push(subElement);
                     }
                 }
@@ -267,4 +268,47 @@ function traverseNode(dataelements, newDataElements, nodeList){
         }
     });
     return newDataElements;
+}
+
+function exportrelationships(){
+    exportToCsv("myFile.csv", selectedDataElements.links);
+}
+
+function findDepthValue(id){
+    var depthVal = 0;
+    selectedDataElements.nodes.forEach((element, index, array) => {
+        if(element.id === id){
+            depthVal = element.depth;
+        }
+    });
+    return depthVal;
+}
+
+function exportToCsv(filename, rows) {
+    var processRow = function (row) {
+        var finalVal = "source: " + row.source + ", target: " + row.target + ", depth:" + findDepthValue(row.source);
+        return finalVal + '\n';
+    };
+
+    var csvFile = '';
+    for (var i = 0; i < rows.length; i++) {
+        csvFile += processRow(rows[i]);
+    }
+
+    var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, filename);
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
 }
