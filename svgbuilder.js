@@ -16,7 +16,7 @@ function ForceGraph({
     nodeStroke = "#fff", // node stroke color
     nodeStrokeWidth = 1.5, // node stroke width, in pixels
     nodeStrokeOpacity = 1, // node stroke opacity
-    nodeRadius = 8, // node radius, in pixels
+    nodeRadius = 5, // node radius, in pixels
     nodeStrength,
     linkSource = ({ source }) => source, // given d in links, returns a node identifier string
     linkTarget = ({ target }) => target, // given d in links, returns a node identifier string
@@ -144,7 +144,7 @@ function buildSvg(selectedElements) {
         id: "mySvg",
         nodeId: d => d.id,
         nodeGroup: d => d.group,
-        nodeTitle: d => `${d.id}\n${d.group}`,
+        nodeTitle: d => `${d.id}\n${d.group}}`,
         linkStrokeWidth: l => Math.sqrt(l.value),
         width: 1930,
         heigh: 800,
@@ -168,19 +168,19 @@ function searchFromPanel(element) {
 
 function listSelectedConnectors() {
     selectedDataElements.nodes.forEach((element, index, array) => {
-        if (element.id.includes("table")) {
+        if (element.group == 1) {
             $("#tables").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
         }
 
-        if (element.id.includes("svc")) {
+        if (element.group == 2) {
             $("#svc").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
         }
 
-        if (element.id.includes("web")) {
+        if (element.group == 3) {
             $("#web").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
         }
 
-        if (element.id.includes("batch")) {
+        if (element.group == 4) {
             $("#batch").append("<button class='panelbutton' onclick=searchFromPanel('" + element.id + "')>" + element.id + "</button>");
         }
 
