@@ -382,6 +382,7 @@
         }
 
         function resetSvg(){
+            document.getElementById('searchval').value = "";
             selectedDataElements = dataelements;
             var svg = buildSvg(selectedDataElements);
             $("#container").html(svg);
@@ -414,10 +415,10 @@
                     newDataElements.links.push(element);
                 }
             });
-            
+
             selectedDataElements = newDataElements;
             var svg = buildSvg(selectedDataElements);
             $("#container").html(svg);
             listSelectedConnectors();
-            
+
         }
