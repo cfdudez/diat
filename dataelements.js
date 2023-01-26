@@ -186,7 +186,7 @@ dataelements = {
         { source: "web8", target: "svc1", value: 1 },
         { source: "web9", target: "svc2", value: 1 },
         { source: "web10", target: "svc2", value: 1 },
-
+        { source: "web10", target: "svc1", value: 1 }
 
     ]
 };

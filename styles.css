@@ -4,10 +4,17 @@
     src: url(punk-kid/punk-kid/punkkid.ttf);
   }
 
-input{
+.valname{
     border-width: 0px;
     font-size: 18px;
 }
+
+.depthsearch{
+    border-width: 0px;
+    font-size: 18px;
+    width: 20px;
+}
+
 button{
     height:100%;
 }
@@ -69,7 +76,7 @@ body{
     padding: 5px;
 }
 .searcharea{
-    width:15%;
+    width:20%;
     float:left;
 }
 
