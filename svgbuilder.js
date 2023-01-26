@@ -13,7 +13,7 @@
             nodeStroke = "#fff", // node stroke color
             nodeStrokeWidth = 1.5, // node stroke width, in pixels
             nodeStrokeOpacity = 1, // node stroke opacity
-            nodeRadius = 5, // node radius, in pixels
+            nodeRadius = 8, // node radius, in pixels
             nodeStrength,
             linkSource = ({ source }) => source, // given d in links, returns a node identifier string
             linkTarget = ({ target }) => target, // given d in links, returns a node identifier string
