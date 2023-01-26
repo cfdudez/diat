@@ -346,26 +346,27 @@
             listSelectedConnectors();
         })
 
+        function searchFromPanel(element){
+            $("#searchval").val(element);
+            rebuildSvg();
+        }
+
         function listSelectedConnectors() {
             selectedDataElements.nodes.forEach((element, index, array) => {
                 if (element.id.includes("table")) {
-                    $("#tables").append(element.id);
-                    $("#tables").append("<br>");
+                    $("#tables").append("<button class='panelbutton' onclick=searchFromPanel('"+element.id+"')>"+element.id+"</button>");                    
                 }
 
                 if (element.id.includes("svc")) {
-                    $("#svc").append(element.id);
-                    $("#svc").append("<br>");
+                    $("#svc").append("<button class='panelbutton' onclick=searchFromPanel('"+element.id+"')>"+element.id+"</button>");                   
                 }
 
                 if (element.id.includes("web")) {
-                    $("#web").append(element.id);
-                    $("#web").append("<br>");
+                    $("#web").append("<button class='panelbutton' onclick=searchFromPanel('"+element.id+"')>"+element.id+"</button>");                                                    
                 }
 
                 if (element.id.includes("batch")) {
-                    $("#batch").append(element.id);
-                    $("#batch").append("<br>");
+                    $("#batch").append("<button class='panelbutton' onclick=searchFromPanel('"+element.id+"')>"+element.id+"</button>");                                                    
                 }
 
             });
