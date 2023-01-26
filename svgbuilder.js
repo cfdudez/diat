@@ -270,7 +270,7 @@ function traverseNode(dataelements, newDataElements, nodeList, depth){
     return newDataElements;
 }
 
-function exportrelationships(){
+function exportRelationships(){
     exportToCsv("myFile.csv", selectedDataElements.links);
 }
 
