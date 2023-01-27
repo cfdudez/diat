@@ -284,9 +284,19 @@ function findDepthValue(id){
     return depthVal;
 }
 
+function findSupporTeam(id){
+    var team = '';
+    selectedDataElements.nodes.forEach((element, index, array) => {
+        if(element.id === id){
+            team = element.supportteam;
+        }
+    });
+    return team;
+}
+
 function exportToCsv(filename, rows) {
     var processRow = function (row) {
-        var finalVal = "source: " + row.source + ", target: " + row.target + ", depth:" + findDepthValue(row.source);
+        var finalVal = "source: " + row.source + ", target: " + row.target + ", depth:" + findDepthValue(row.target) +", supportteam:"+findSupporTeam(row.target);
         return finalVal + '\n';
     };
 
